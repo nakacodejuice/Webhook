@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+   p {
+    text-indent: 1.5em; /* Отступ сверху */
+
+   }
+  </style>
+  {{base_dir}}
+{% for request in requests %}
+    <li>Время запроса:{{ request.DateTimeField}}
+        <p ><b>Messanger : {{ request.Messanger }}</b></p>
+		<p >request: {{ request.requesttext }}</p>
+	
+	</li>
+{% endfor %}
+
