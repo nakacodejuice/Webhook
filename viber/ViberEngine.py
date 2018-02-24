@@ -7,11 +7,17 @@ import time
 import os
 import datetime
 from RNGWebServEngine.RNGWebServices import RNGConnector
+from RNGWebServEngine.Trains import TrainConnector
+
 
 sessiontime = 3600
+UseTrains = True
+hosttrain = ""
+logintrains =""
+passwordtrains=""
 loginRNG = ""
 passRNG = ""
-TokenViber = '46e547aa43e7d4dd-825e96ff5018ef1d-eef9450dfdce6f70'
+TokenViber = ''
 hostviber = 'https://chatapi.viber.com'
 sender = {'name':'Novatek-Kostroma','avatar':'http://gas-kostroma.ru/images/common/logo-kostroma.jpg'}
 ImageSetl = "https://image.ibb.co/hPy8uw/image.png"
@@ -356,15 +362,24 @@ class ExecViber():
     def ExecInRNG(self,id,algname,params):
         datameterjson = ''
         try:
-            RNG = RNGConnector()
-            res = RNG.Connect()
-            if(res!=False):
-                datameterjson = RNG.Execute(algname, JsonResponse(params, safe=False))
+            if(UseTrains==False):
+                RNG = RNGConnector()
+                res = RNG.Connect()
+                if(res!=False):
+                    datameterjson = RNG.Execute(algname, JsonResponse(params, safe=False))
+                else:
+                    self.SendMessage(id,
+                                     'В данный момент проводятся регламентные работы. Повторите попытку позже. Приносим извинения за доставленные неудобства.')
+                    OopsEventsOfReq.objects.update_or_create(id=id,defaults={'id': id})
+                    self.SendLinkToMain(id)
             else:
-                self.SendMessage(id,
-                                 'В данный момент проводятся регламентные работы. Повторите попытку позже. Приносим извинения за доставленные неудобства.')
-                OopsEventsOfReq.objects.update_or_create(id=id,defaults={'id': id})
-                self.SendLinkToMain(id)
+                RNG = TrainConnector(hosttrain,logintrains,passwordtrains)
+                datameterjson = RNG.Execute(algname, JsonResponse(params, safe=False))
+                if(datameterjson=="Error"):
+                    self.SendMessage(id,
+                                     'В данный момент проводятся регламентные работы. Повторите попытку позже. Приносим извинения за доставленные неудобства.')
+                    OopsEventsOfReq.objects.update_or_create(id=id, defaults={'id': id})
+                    self.SendLinkToMain(id)
         except:
             self.SendMessage(id,
                              'В данный момент проводятся регламентные работы. Повторите попытку позже. Приносим извинения за доставленные неудобства.')

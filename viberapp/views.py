@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Request,messages,accounts,messagestatus,viberid,OopsEventsOfReq,QueueReceipt,Receipt
+from .models import Request,OopsEventsOfReq,QueueReceipt,Receipt
 import datetime
 from Telegram.TelegramEngine import ExecTelegram
 from datetime import timedelta
@@ -109,7 +109,7 @@ def RNG(request):
                     for dataid in QuerySetids:
                         id = dataid['chatid']
                         exec = ExecTelegram()
-                        exec.SendMessage(id, 'С Вашего аккаунта было обращение к боту ООО "НОВАТЭК-Кострома" во время проведения регламентых работ. Сообщаяем Вам, что в настоящее время функционал работает в полном объеме')
+                        exec.SendMessage(id, 'С Вашего аккаунта было обращение к боту ООО "НОВАТЭК-Кострома" во время проведения регламентых работ. Сообщаем Вам, что в настоящее время функционал работает в полном объеме')
                         p = OopsEventsOfReq.objects.get(chatid=id)
                         p.delete()
                 elif(messagestr=='GetQueueReceipt'):
