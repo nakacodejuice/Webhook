@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51f10f95-9ddc-4b9e-bd97-fbce823fd32f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RNGWebServEngine/Trains.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Telegram/TelegramEngine.py" afterPath="$PROJECT_DIR$/Telegram/TelegramEngine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viber/ViberEngine.py" afterPath="$PROJECT_DIR$/viber/ViberEngine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viberapp/admin.py" afterPath="$PROJECT_DIR$/viberapp/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viberapp/views.py" afterPath="$PROJECT_DIR$/viberapp/views.py" />
     </list>
     <ignored path="viberWebhook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -566,6 +561,14 @@
       <option name="presentableId" value="Default" />
       <updated>1509997235915</updated>
     </task>
+    <task id="LOCAL-00001" summary="Добавлены паровозики">
+      <created>1519485580781</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1519485580781</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -612,6 +615,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Добавлены паровозики" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлены паровозики" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
