@@ -10,7 +10,7 @@ class TrainConnector():
         self.password=password
     def Execute(self,algname,parametrsjson):
         try:
-            Message = {'event,data','SetNewRequest',{'id,params',algname,parametrsjson}};
+            Message = {'event':'SetNewRequest','data':{'id,params',algname,parametrsjson}};
             messagejson = JsonResponse(Message, safe=False)
             headers = {'content-type': 'application/json; charset=utf-8'}
             res = requests.post(self.hosttrain  + '/rest', data=messagejson, headers=headers, auth=HTTPBasicAuth(self.login, self.password))

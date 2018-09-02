@@ -30,39 +30,6 @@ def viber(request):
             messagestr = received_json_data['message']
             exec = ExecTelegram()
             exec.SelectAction(id, messagestr)
-        #     messagestr = received_json_data['message']
-        #     if(messagestr['type']=='text'):
-        #         userstr = received_json_data['sender']
-        #         dtime = datetime.datetime.fromtimestamp(received_json_data['timestamp'] / 1000)
-        #         mes = messages(text=messagestr['text'],dtime=dtime,
-        #                    message_token=str(received_json_data['message_token']),idviber=userstr['id'],name =userstr['name'])
-        #         mes.save()
-        #         obj = viberid.objects.update_or_create(idviber=userstr['id'], name=userstr['name'],
-        #                                                defaults={'idviber': userstr['id'], 'subscribed': True})
-        # elif ((received_json_data['event'] == 'delivered')or(received_json_data['event'] == 'seen')
-        #       or (received_json_data['event'] == 'failed')):
-        #     dtime = datetime.datetime.fromtimestamp(received_json_data['timestamp'] / 1000)
-        #     status = messagestatus(message_token=received_json_data['message_token'], user_id=received_json_data['user_id'],
-        #                status=received_json_data['event'], dtime = dtime)
-        #     status.save()
-        # elif (received_json_data['event'] == 'conversation_started'):
-        #     if (received_json_data['subscribed'] == False):
-        #         status = False
-        #     else:
-        #         status = True
-        #     user = received_json_data['user']
-        #     user_id = user['id']
-        #     obj, created = viberid.objects.update_or_create(idviber=user_id,name=user['name'],
-        #                                            defaults={'idviber': user_id, 'subscribed': status})
-        # elif ( (received_json_data['event'] == 'unsubscribed') or (received_json_data['event'] == 'subscribed')):
-        #     if(received_json_data['event'] == 'subscribed'):
-        #         status = True
-        #     else:
-        #         status = False
-        #     user = received_json_data['user']
-        #     user_id = user['id']
-        #     obj = viberid.objects.update_or_create(idviber=user_id,name=user['name'],
-        #                                 defaults={'idviber': user_id,'subscribed':status})
     return HttpResponse(status=200)
 
 def viberfiles(request):
