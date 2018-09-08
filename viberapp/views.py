@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Request,OopsEventsOfReq,QueueReceipt,Receipt
 import datetime
 from Telegram.TelegramEngine import ExecTelegram
+from viber.ViberEngine import ExecViber
 from datetime import timedelta
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -25,10 +26,10 @@ def viber(request):
         received_json_data = json.loads(request.body.decode("utf-8-sig"))
         if(type(received_json_data)==str):
             received_json_data = json.loads(received_json_data)
-
         if (received_json_data['event'] == 'message'):
             messagestr = received_json_data['message']
-            exec = ExecTelegram()
+            exec = ExecViber()
+            id = str(messagestr['from']['id'])
             exec.SelectAction(id, messagestr)
     return HttpResponse(status=200)
 

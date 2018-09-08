@@ -19,7 +19,7 @@ class tokenToSnapping(models.Model):
     lschet = models.IntegerField(primary_key=True)
     tokenid = models.IntegerField()
     name = models.CharField(max_length=24)
-    messanger = models.CharField(max_length=24,primary_key=True,default='telegram')
+    messanger = models.CharField(max_length=24,default='telegram')
     datetime = models.DateTimeField('date created', auto_now_add=True)
     def __str__(self):
         return self.name+'-'+self.lschet
@@ -76,7 +76,7 @@ class QueueReceipt(models.Model):
 class Receipt(models.Model):
     chatid = models.CharField(max_length=24, primary_key=True)
     ls = models.CharField(max_length=10)
-    file_id = models.DateTimeField(max_length=10)
+    file_id = models.CharField(max_length=10)
     datetime = models.DateTimeField('date created', auto_now_add=True)
     month = models.DateField()
     def __str__(self):

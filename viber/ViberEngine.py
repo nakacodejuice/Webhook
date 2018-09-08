@@ -80,13 +80,13 @@ class ExecViber():
                 data = json.loads(datajson)
                 history = data['history']
                 if (history.count() > 0):
-                    responsetext = '<p>История передачи показаний приборов учета:<br>'
+                    responsetext = 'История передачи показаний приборов учета:\r\n'
                     for meterData in history:
-                        responsetext = responsetext + meterData['MeterSTR'] + '<br>'
+                        responsetext = responsetext + meterData['MeterSTR'] + '\r\n'
                         responsetext = self.CreateTabMeter(responsetext, meterData['Data'])
-                    responsetext = responsetext + '</p>'
+                    responsetext = responsetext + '\r\n'
             else:
-                responsetext = '<p>Нет ни одного лицевого счета, привязанного к Вашему аккаунту!!!' + '<br></p>'
+                responsetext = 'Нет ни одного лицевого счета, привязанного к Вашему аккаунту!!!\r\n'
             self.SendMessage(id, responsetext)
             self.SendLinkToMain(id)
         elif messagetext == 'Взаиморасчеты':
@@ -95,15 +95,15 @@ class ExecViber():
                                           {'account': self.lsact})
                 if (datajson != ''):
                     data = json.loads(datajson)
-                    responsetext = '<p>Данные по взаиморасчетам:<br>'
-                    responsetext = responsetext + 'Долг на ' + str(data['Month']) + ' - ' + str(data['Saldo']) + '<br>'
+                    responsetext = 'Данные по взаиморасчетам:\r\n'
+                    responsetext = responsetext + 'Долг на ' + str(data['Month']) + ' - ' + str(data['Saldo']) + '\r\n'
                     responsetext = responsetext + 'Начислено за ' + str(data['MonthSTR']) + ' - ' + str(
-                        data['Nachisleno']) + '<br>'
-                    responsetext = responsetext + 'Оплачено ' + ' - ' + str(data['Oplacheno']) + '<br>'
-                    responsetext = responsetext + 'К оплате ' + ' - ' + str(data['KOplate']) + '<br></p>'
+                        data['Nachisleno']) + '\r\n'
+                    responsetext = responsetext + 'Оплачено ' + ' - ' + str(data['Oplacheno']) + '\r\n'
+                    responsetext = responsetext + 'К оплате ' + ' - ' + str(data['KOplate']) + '\r\n'
                     self.SendMessage(id, responsetext)
             else:
-                responsetext = '<p>Нет ни одного лицевого счета, привязанного к Вашему аккаунту!!!' + '<br></p>'
+                responsetext = 'Нет ни одного лицевого счета, привязанного к Вашему аккаунту!!!' + '\r\n'
                 self.SendMessage(id, responsetext)
         elif messagetext == 'Передать показания счетчика':
             datameterjson = self.ExecInRNG(id, 'Messendger_GetMeters',
@@ -129,7 +129,7 @@ class ExecViber():
                     else:
                         datameter = data['datameter']
                         responsetext = 'Введите показания прибора учета ' + listofmeters[0] + '. Предыдущие ' + str(
-                            datameter['readout']) + ' от ' + str(datameter['datereadout'].date())
+                            datameter['readout']) + ' от ' + str(datameter['datereadout'])
                         self.SendMessage(id, responsetext)
                         textstate = 'setreadout'
                         sessionstate.objects.update_or_create(id=id, state=textstate, data1=datameter['MeterGUID'],
@@ -177,7 +177,7 @@ class ExecViber():
                                          'Квитанция по лицевому счету ' + self.lsact + ' добавлена в очередь на формирование и при готовности будет Вам незамедлительно отправлена!')
 
             else:
-                responsetext = '<p>Нет ни одного лицевого счета, привязанного к Вашему аккаунту!!!' + '<br></p>'
+                responsetext = 'Нет ни одного лицевого счета, привязанного к Вашему аккаунту!!!' + '\r\n'
                 self.SendMessage(id, responsetext)
             self.SendLinkToMain(id)
         elif messagetext == 'Выбрать текущий л/с':
@@ -211,7 +211,7 @@ class ExecViber():
             result = self.SendMessage(id, responsetext)
             obj = sessionstate.objects.update_or_create(id=id, state=messagetext,
                                                    defaults={'id': id, 'state': messagetext})
-        elif messagetext =='settings' or messagetext=='/settings' or messagetext=='Настройки':
+        elif messagetext == 'settings' or messagetext=='/settings' or messagetext=='Настройки':
             if self.ls.count()==0:
                 responsetext =  "Внимание! К вашему аккаунту нет привязанных л/с. Обратитесь по т. (4942)395-110 для получения кода авторизации"
                 self.SendMessage(id,responsetext)
@@ -223,7 +223,7 @@ class ExecViber():
                                "#f6f7f9")
             keyboard.AddButton(3, 2, "Главное меню", "small", "center", "bottom", "reply", "Главное меню", "#f6f7f9")
             self.SendMessage(id, 'Выберите действие', keyboard.CreateKeyboard())
-        elif messagetext =='help' or messagetext=='/help' or messagetext == 'start' or messagetext == '/start':
+        elif messagetext == 'help' or messagetext=='/help' or messagetext == 'start' or messagetext == '/start':
             responsetext ="Бот для получения информации по взаиморасчетам, передачи показаний счетчика, получения платежного документа по поставщику газа на территории Костромской области ООО 'НОВАТЭК-Кострома' <br>"
             if self.ls.count()!=0:
                 responsetext = 'Текущий выбранный л/с '+self.lsact+'<br>'
@@ -285,7 +285,7 @@ class ExecViber():
                             WorkTime = ContactsData['Address']
                             latGPS = ContactsData['latGPS']
                             longGPS = ContactsData['longGPS']
-                            text = '<p> Адрес: ' + Address + '<br>' + 'Тел. :' + Tel+'<br>' + 'Рабочее время :' + WorkTime+'</p>'
+                            text = 'Адрес: ' + Address + '<br>' + 'Тел. :' + Tel+'<br>' + 'Рабочее время :' + WorkTime+'\r\n'
                             self.SendMessage(id, text)
                             self.SendLocation(id, {"lat": latGPS,"lon":longGPS})
                         except ObjectDoesNotExist:
